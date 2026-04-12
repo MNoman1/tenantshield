@@ -1,0 +1,12 @@
+{
+  "name": "uae-tenancy-app",
+  "version": "1.0.0",
+  "description": "TenantShield — UAE Tenancy AI SaaS",
+  "scripts": {
+    "install:all": "cd backend && npm install && cd ../frontend && npm install",
+    "dev:backend": "cd backend && node server.js",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build",
+    "start": "cd backend && node server.js"
+  }
+}
