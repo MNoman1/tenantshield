@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import axios from 'axios'
+import api from '../api'
 import { useAuth } from '../context/AuthContext'
 
 const SYSTEM_PROMPT = `You are UAE Tenancy AI — a specialized expert assistant for UAE landlord-tenant law.
@@ -62,7 +62,7 @@ export default function ChatPage() {
 
   // Load history from server (decrypted by backend using user's enc key)
   useEffect(() => {
-    axios.get('/api/messages').then(r => {
+    api.get('/api/messages').then(r => {
       const history = r.data.map(m => ({
         id: m.id,
         role: m.role,
@@ -104,14 +104,14 @@ export default function ChatPage() {
     setLoading(true)
 
     // Save user message (server encrypts before storing)
-    axios.post('/api/messages', { role: 'user', content: text, tool: 'chat' }).catch(() => {})
+    api.post('/api/messages', { role: 'user', content: text, tool: 'chat' }).catch(() => {})
 
     // Build conversation for API
     const history = messages.slice(-20).map(m => ({ role: m.role, content: m.content }))
     history.push({ role: 'user', content: text })
 
     try {
-      const resp = await axios.post('/api/chat', {
+      const resp = await api.post('/api/chat', {
         system: SYSTEM_PROMPT + `\n\nUser's emirate: ${user?.emirate || 'Dubai'}`,
         messages: history,
       })
@@ -121,10 +121,10 @@ export default function ChatPage() {
       setMessages(prev => [...prev, aiMsg])
 
       // Save AI message
-      axios.post('/api/messages', { role: 'assistant', content: reply, tool: 'chat' }).catch(() => {})
+      api.post('/api/messages', { role: 'assistant', content: reply, tool: 'chat' }).catch(() => {})
 
       // Log activity
-      axios.post('/api/activity', {
+      api.post('/api/activity', {
         type: 'chat',
         description: `Asked: "${text.slice(0, 60)}${text.length > 60 ? '...' : ''}"`,
         icon: '💬'
@@ -142,20 +142,20 @@ export default function ChatPage() {
     const lastAI = [...messages].reverse().find(m => m.role === 'assistant')
     if (!lastAI) return showToast('No AI response to save yet', 'error')
     try {
-      await axios.post('/api/drafts', {
+      await api.post('/api/drafts', {
         title: `Chat draft — ${new Date().toLocaleDateString('en-AE')}`,
         content: lastAI.content,
         type: 'chat',
         emirate: user?.emirate || 'dubai'
       })
-      await axios.post('/api/activity', { type: 'draft_saved', description: 'Saved chat response as draft', icon: '📄' })
+      await api.post('/api/activity', { type: 'draft_saved', description: 'Saved chat response as draft', icon: '📄' })
       showToast('Saved to drafts ✓')
     } catch { showToast('Failed to save', 'error') }
   }
 
   const clearHistory = async () => {
     if (!confirm('Clear all chat history?')) return
-    await axios.delete('/api/messages')
+    await api.delete('/api/messages')
     setMessages([])
     showToast('Chat history cleared')
   }

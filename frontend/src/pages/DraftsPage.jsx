@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
+import api from '../api'
 
 const TYPE_LABELS = { chat: 'Chat', notice: 'Notice', calc: 'Calculator', letter: 'Letter' }
 const TYPE_BADGE = { chat: 'badge-chat', notice: 'badge-notice', calc: 'badge-calc', letter: 'badge-notice' }
@@ -29,7 +29,7 @@ export default function DraftsPage() {
 
   const loadDrafts = () => {
     setLoading(true)
-    axios.get('/api/drafts')
+    api.get('/api/drafts')
       .then(r => setDrafts(r.data))
       .catch(() => showToast('Failed to load drafts', 'error'))
       .finally(() => setLoading(false))
@@ -45,7 +45,7 @@ export default function DraftsPage() {
   const saveDraft = async () => {
     if (!selected) return
     try {
-      await axios.put(`/api/drafts/${selected.id}`, { content: editContent, title: selected.title })
+      await api.put(`/api/drafts/${selected.id}`, { content: editContent, title: selected.title })
       showToast('Draft saved ✓')
       loadDrafts()
     } catch { showToast('Failed to save', 'error') }
@@ -55,11 +55,11 @@ export default function DraftsPage() {
     e.stopPropagation()
     if (!confirm('Delete this draft?')) return
     try {
-      await axios.delete(`/api/drafts/${id}`)
+      await api.delete(`/api/drafts/${id}`)
       setDrafts(d => d.filter(x => x.id !== id))
       if (selected?.id === id) setSelected(null)
       showToast('Draft deleted')
-      await axios.post('/api/activity', { type: 'draft_deleted', description: 'Deleted a draft', icon: '🗑️' })
+      await api.post('/api/activity', { type: 'draft_deleted', description: 'Deleted a draft', icon: '🗑️' })
     } catch { showToast('Failed to delete', 'error') }
   }
 

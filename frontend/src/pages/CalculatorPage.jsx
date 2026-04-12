@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import axios from 'axios'
+import api from '../api'
 import { useAuth } from '../context/AuthContext'
 
 const EMIRATE_RULES = {
@@ -98,7 +98,7 @@ export default function CalculatorPage() {
 
     const savingIfLegal = legal ? 0 : proposed - maxRent
     setResult({ legal, verdict, explanation, maxRent, maxIncreasePct, gapPct, savingIfLegal, cur, proposed, rules })
-    axios.post('/api/activity', { type: 'calc', description: `Calculated rent legality for ${rules.name}: ${verdict}`, icon: '🧮' }).catch(() => {})
+    api.post('/api/activity', { type: 'calc', description: `Calculated rent legality for ${rules.name}: ${verdict}`, icon: '🧮' }).catch(() => {})
   }
 
   const saveToDrafts = async () => {
@@ -126,13 +126,13 @@ ${result.legal
 ⚠️ This calculation is for informational purposes only. Consult a UAE-licensed legal professional for official advice.`
 
     try {
-      await axios.post('/api/drafts', {
+      await api.post('/api/drafts', {
         title: `Rent Calculator — ${result.rules.name} — ${new Date().toLocaleDateString('en-AE')}`,
         content,
         type: 'calc',
         emirate: form.emirate,
       })
-      await axios.post('/api/activity', { type: 'draft_saved', description: 'Saved rent calculation as draft', icon: '📄' })
+      await api.post('/api/activity', { type: 'draft_saved', description: 'Saved rent calculation as draft', icon: '📄' })
       showToast('Saved to drafts ✓')
     } catch { showToast('Failed to save', 'error') }
   }

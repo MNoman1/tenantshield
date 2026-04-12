@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
+import api from '../api'
 
 const TYPE_COLORS = {
   chat: 'var(--green-light)',
@@ -30,7 +30,7 @@ export default function ActivityPage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    axios.get('/api/activity')
+    api.get('/api/activity')
       .then(r => setActivities(r.data))
       .catch(() => {})
       .finally(() => setLoading(false))

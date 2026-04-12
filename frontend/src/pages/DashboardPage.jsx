@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import axios from 'axios'
+import api from '../api'
 import { useAuth } from '../context/AuthContext'
 
 const quickActions = [
@@ -25,7 +25,7 @@ export default function DashboardPage() {
   const [stats, setStats] = useState({ messages: 0, drafts: 0, activities: 0 })
 
   useEffect(() => {
-    axios.get('/api/stats').then(r => setStats(r.data)).catch(() => {})
+    api.get('/api/stats').then(r => setStats(r.data)).catch(() => {})
   }, [])
 
   const handleQuickAction = (action) => {
