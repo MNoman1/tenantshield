@@ -111,16 +111,9 @@ export default function ChatPage() {
     history.push({ role: 'user', content: text })
 
     try {
-      const resp = await axios.post('https://api.anthropic.com/v1/messages', {
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1500,
+      const resp = await axios.post('/api/chat', {
         system: SYSTEM_PROMPT + `\n\nUser's emirate: ${user?.emirate || 'Dubai'}`,
         messages: history,
-      }, {
-        headers: {
-          'Content-Type': 'application/json',
-          'anthropic-dangerous-direct-browser-access': 'true',
-        }
       })
 
       const reply = resp.data.content?.map(c => c.text || '').join('') || 'Sorry, could not get a response.'

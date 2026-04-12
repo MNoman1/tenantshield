@@ -267,6 +267,38 @@ app.get('/api/stats', requireAuth, (req, res) => {
   res.json({ messages: msgs, drafts, activities: acts });
 });
 
+
+// ─── AI Chat proxy (keeps API key server-side) ───────────────────────────────
+app.post('/api/chat', requireAuth, apiLimiter, async (req, res) => {
+  const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
+  if (!ANTHROPIC_API_KEY) return res.status(500).json({ error: 'ANTHROPIC_API_KEY not set on server' });
+
+  const { system, messages } = req.body;
+  if (!messages || !Array.isArray(messages)) return res.status(400).json({ error: 'messages array required' });
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': ANTHROPIC_API_KEY,
+        'anthropic-version': '2023-06-01',
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1500,
+        system: system || '',
+        messages,
+      }),
+    });
+    const data = await response.json();
+    if (!response.ok) return res.status(response.status).json({ error: data.error?.message || 'Anthropic API error' });
+    res.json(data);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to reach Anthropic API' });
+  }
+});
+
 // ─── Health ───────────────────────────────────────────────────────────────────
 app.get('/api/health', (req, res) => res.json({ status: 'ok', timestamp: new Date().toISOString() }));
 
