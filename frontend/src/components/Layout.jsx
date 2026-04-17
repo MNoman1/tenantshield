@@ -2,103 +2,101 @@ import { Outlet, NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { useState } from 'react'
 
-const navItems = [
-  { to: '/', label: 'Dashboard', icon: '⊞', exact: true },
-  { to: '/chat', label: 'AI Chat', icon: '💬' },
-  { to: '/calculator', label: 'Rent Calculator', icon: '🧮' },
-  { to: '/drafts', label: 'My Drafts', icon: '📄' },
-  { to: '/activity', label: 'Activity', icon: '📊' },
+const LANDLORD_NAV = [
+  { section: 'Overview', items: [{ to: '/', label: 'Dashboard', icon: '⊞', exact: true }] },
+  { section: 'Portfolio', items: [
+    { to: '/properties', label: 'Properties', icon: '🏢' },
+    { to: '/units', label: 'Units', icon: '🏠' },
+    { to: '/tenancies', label: 'Tenancies', icon: '📋' },
+  ]},
+  { section: 'Finance', items: [
+    { to: '/cheques', label: 'Cheques & Payments', icon: '💳' },
+  ]},
+  { section: 'Communicate', items: [
+    { to: '/messages', label: 'Messages', icon: '💬' },
+    { to: '/documents', label: 'Documents', icon: '📁' },
+    { to: '/maintenance', label: 'Maintenance', icon: '🔧' },
+  ]},
+  { section: 'AI Tools', items: [
+    { to: '/chat', label: 'AI Assistant', icon: '🤖' },
+    { to: '/calculator', label: 'Rent Calculator', icon: '🧮' },
+    { to: '/drafts', label: 'Drafts', icon: '📄' },
+  ]},
 ]
 
-const emirateOptions = [
-  { value: 'dubai', label: 'Dubai' },
-  { value: 'sharjah', label: 'Sharjah' },
-  { value: 'abudhabi', label: 'Abu Dhabi' },
-  { value: 'ajman', label: 'Ajman' },
-  { value: 'rak', label: 'Ras Al Khaimah' },
+const TENANT_NAV = [
+  { section: 'Overview', items: [{ to: '/', label: 'Dashboard', icon: '⊞', exact: true }] },
+  { section: 'My Tenancy', items: [
+    { to: '/tenancies', label: 'My Lease', icon: '📋' },
+    { to: '/cheques', label: 'Payments', icon: '💳' },
+  ]},
+  { section: 'Communicate', items: [
+    { to: '/messages', label: 'Messages', icon: '💬' },
+    { to: '/documents', label: 'Documents', icon: '📁' },
+    { to: '/maintenance', label: 'Maintenance', icon: '🔧' },
+  ]},
+  { section: 'AI Tools', items: [
+    { to: '/chat', label: 'AI Assistant', icon: '🤖' },
+    { to: '/calculator', label: 'Rent Calculator', icon: '🧮' },
+    { to: '/drafts', label: 'Drafts', icon: '📄' },
+  ]},
 ]
 
 export default function Layout() {
-  const { user, logout, updateEmirate } = useAuth()
+  const { user, logout } = useAuth()
   const navigate = useNavigate()
-  const [sidebarOpen, setSidebarOpen] = useState(true)
-
-  const handleLogout = () => { logout(); navigate('/login') }
+  const [open, setOpen] = useState(true)
+  const nav = user?.role === 'landlord' ? LANDLORD_NAV : TENANT_NAV
 
   return (
     <div className="app-shell">
-      <aside className={`sidebar ${sidebarOpen ? 'open' : 'collapsed'}`}>
+      <aside className={`sidebar ${open ? 'open' : 'collapsed'}`}>
         <div className="sidebar-top">
           <div className="logo-row">
             <div className="logo-mark">🏠</div>
-            {sidebarOpen && (
-              <div>
-                <div className="logo-name">TenantShield</div>
-                <div className="logo-sub">UAE Tenancy AI</div>
-              </div>
-            )}
-            <button className="toggle-btn" onClick={() => setSidebarOpen(o => !o)}>
-              {sidebarOpen ? '◀' : '▶'}
-            </button>
+            {open && <div><div className="logo-name">TenantShield</div><div className="logo-sub">UAE Property AI</div></div>}
+            <button className="toggle-btn" onClick={() => setOpen(o => !o)}>{open ? '◀' : '▶'}</button>
           </div>
-
-          {sidebarOpen && (
-            <div className="emirate-picker">
-              <label className="picker-label">YOUR EMIRATE</label>
-              <select
-                value={user?.emirate || 'dubai'}
-                onChange={e => updateEmirate(e.target.value)}
-                className="emirate-select"
-              >
-                {emirateOptions.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
-              </select>
-            </div>
-          )}
+          {open && <div className={`role-pill ${user?.role}`}>{user?.role === 'landlord' ? '🏢 Landlord' : '🧑 Tenant'}</div>}
         </div>
 
-        <nav className="nav-links">
-          {navItems.map(item => (
-            <NavLink
-              key={item.to}
-              to={item.to}
-              end={item.exact}
-              className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}
-            >
-              <span className="nav-icon">{item.icon}</span>
-              {sidebarOpen && <span className="nav-label">{item.label}</span>}
-            </NavLink>
+        <div className="nav-section" style={{ flex: 1, overflowY: 'auto' }}>
+          {nav.map(section => (
+            <div key={section.section}>
+              {open && <div className="nav-label">{section.section}</div>}
+              {section.items.map(item => (
+                <NavLink key={item.to} to={item.to} end={item.exact}
+                  className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
+                  <span className="nav-icon">{item.icon}</span>
+                  {open && <span>{item.label}</span>}
+                </NavLink>
+              ))}
+            </div>
           ))}
-        </nav>
+        </div>
 
         <div className="sidebar-bottom">
-          {sidebarOpen && (
+          {open && (
             <>
               <div className="enc-badge">
-                <span className="enc-icon">🔒</span>
-                <div>
-                  <div className="enc-title">End-to-End Encrypted</div>
-                  <div className="enc-sub">Your data is private</div>
-                </div>
+                <span style={{ fontSize: 13 }}>🔒</span>
+                <div><div className="enc-title">End-to-end encrypted</div><div className="enc-sub">Your data is private</div></div>
               </div>
               <div className="user-row">
-                <div className="avatar">{user?.name?.[0]?.toUpperCase()}</div>
+                <div className={`avatar ${user?.role}`}>{user?.name?.[0]?.toUpperCase()}</div>
                 <div className="user-info">
                   <div className="user-name">{user?.name}</div>
-                  <div className="user-email">{user?.email}</div>
+                  <div className="user-role">{user?.role} · {user?.emirate}</div>
                 </div>
-                <button className="logout-btn" onClick={handleLogout} title="Logout">⏻</button>
+                <button className="logout-btn" onClick={() => { logout(); navigate('/login') }}>⏻</button>
               </div>
             </>
           )}
-          {!sidebarOpen && (
-            <button className="logout-btn-small" onClick={handleLogout} title="Logout">⏻</button>
-          )}
+          {!open && <button className="logout-btn" style={{ display: 'block', margin: '0 auto' }} onClick={() => { logout(); navigate('/login') }}>⏻</button>}
         </div>
       </aside>
 
-      <main className="main-content">
-        <Outlet />
-      </main>
+      <main className="main-content"><Outlet /></main>
     </div>
   )
 }

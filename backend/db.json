@@ -1,0 +1,86 @@
+{
+  "users": [
+    {
+      "id": "97ecb01c-6ac4-4b4c-b766-3aa29e5b347a",
+      "email": "chnauman111@gmail.com",
+      "passwordHash": "$2b$12$ji6Iy5.Dmd2sWfV33PxCAurFSVCPLlZbVEi63x.dQmjhah0mrxEz6",
+      "name": "Muhammad Noman",
+      "createdAt": "2026-04-12T12:31:10.956Z",
+      "plan": "free",
+      "emirate": "dubai"
+    }
+  ],
+  "sessions": [],
+  "drafts": [
+    {
+      "id": "29a657a5-5199-49b2-b399-30cb04372898",
+      "userId": "97ecb01c-6ac4-4b4c-b766-3aa29e5b347a",
+      "title": "46aec473349dc771cbb8c024:d21ffbd13b06c36baa5affa25c2da5aa:ac03e15650c0c6eda97fc10adef417b24356fb56c18c5534f74df799ed5dc1690f5c4db56abf26f4",
+      "content": "bc0bb40f95fb82b3245a772a:226f0c03e554c32807b88fe2e8fec30c:b9440650b48884e49c6a94da4022ee5d370717d22a3a6752cbb81076f9a5b4889720eca994fdce58e1300ff40bd63b32a7fd0b98dcca5d99b240a36c1342eb78eabf194c0f67a353d38d2c37a903b460c2567ff531795c835d93fde59b2625af9ab8f77553270a0320d79a5d5a94dbada12323f4d17f57406c6fab67a8f9f92ea517b51b0507b497e14ba8a19c15a1d92c535f99bf513651ef1367503a49616be0babe022acd17e6e90fd249a21f9f7276f29f0637216caf2273f13f7d0e4961b3a34e21e2a0f0b1087b29bb27440a26a893c3466362e16fb3c5b9569a0241fc62ac19ed7a060a2dc230093f4d2fb66283342ddd3c0631bafd42724b7bbacffb7a5b24e288367379827104a95cc14e2fb99654ad910359588f467780a05c766503ea2767157d91bfe8803b7451f404aacad1d946352cb69144091c803fd7183c74a8e17936b3eae1393319fbc794347e1d5e16e81fd18fb1c97ecaf2e5cc7dab79920092933177a6d3aa5b994518e2c81e8f8f5bf4ca0b2005c9ba01f82af839475977b49eb9c336a4104ffc5141ad2c4eac6a5b8d6640a6653f7a5f0dbdb7afd437f235899563ef4095f25b1e63f21277eb439c85721e8a367981db2a5646a286d42953cead046db37ee7a0466a626d8ae1bc97eaf3273361c3b7f36c8f5e337b777c6266434c74f2ea80926e5aeb11528b326340e1da8c73e124be96a2e6e2fb4abbf3725d2e67f37e3bf3713928cbf7b3da399de0536c9114a89dfd2c0387fe1994b587894a15a512b6f7150ed77745aa494d093503c421a3188e71133c39a04cd54459aba6a6020d9531161dad015edf73d3b39144cfabbb4ea7de7c87c2bbf2d1deb7685cc946e44acf698799c83ab1e78099cbb3f3125ead6cee3a16a31e52fce7364872eadff2ee69dfec15ce960c88541244911e47ff27039b185e40ba06c6413b9445fec928c8895bcc572aa7da49d5300f1604232bbdab2ad122bbf175311aa9dde0e9663aafe907a333fc1f3b32f9c1616550d999fdc100d159561f65434ebf3e7e21e517cb30bc7c8dfa83f22fa25d682247b477bda79f37cea1bc0400d94e943d8cb8fac5b71214b3f800f07b99f4f6d5",
+      "type": "calc",
+      "emirate": "dubai",
+      "createdAt": "2026-04-12T12:33:42.431Z",
+      "updatedAt": "2026-04-12T12:33:42.431Z"
+    }
+  ],
+  "activities": [
+    {
+      "id": "5c5a2093-e4ee-4306-aab1-998c881ff74a",
+      "userId": "97ecb01c-6ac4-4b4c-b766-3aa29e5b347a",
+      "type": "calc",
+      "description": "58c3193b3caed2683fb3d044:0f59edf36e4bfd7a48d49bc274f0ac15:f57798c5c3394d3dd11eb34b097315990546b2a4a6be40641491b8e31178223f30148a701b6e96b014ff53e1cbbdd7c0fb23f935e793da699b3d1526962d73549398a980",
+      "icon": "🧮",
+      "createdAt": "2026-04-12T12:31:51.287Z"
+    },
+    {
+      "id": "0cc4bc34-3268-49ee-b165-82d07162287b",
+      "userId": "97ecb01c-6ac4-4b4c-b766-3aa29e5b347a",
+      "type": "calc",
+      "description": "f2a9b97591bce0b87417d52c:88cd95a07c65380baebfcbfbe7cd38b3:4738e0f339501d78b84d48304dc954edc7fe70cd282924e7e292e7910b92807cd5cbf2d4b9d330558b91856a670845b5fe0a2d85d5dbc24df5e2aa36bbf506374cb00053",
+      "icon": "🧮",
+      "createdAt": "2026-04-12T12:32:25.351Z"
+    },
+    {
+      "id": "ba85e78f-9438-4cc1-b70c-0206b911592b",
+      "userId": "97ecb01c-6ac4-4b4c-b766-3aa29e5b347a",
+      "type": "calc",
+      "description": "512bd9d9d79af87d42799abb:865fc4778c58c525525a0f97c62770ab:7c72129e36549aa144da203728e271ba62d8bca839e1352db454e979d7b13325ad06d3a7238878c12c9710e12fa3b91457ee90a9620886139ac40bc1ca0b6f610efc76ed",
+      "icon": "🧮",
+      "createdAt": "2026-04-12T12:32:26.997Z"
+    },
+    {
+      "id": "008911b7-3b1f-4f87-af4e-7b0045f6b1e3",
+      "userId": "97ecb01c-6ac4-4b4c-b766-3aa29e5b347a",
+      "type": "calc",
+      "description": "c9844a7f7ff16282bbf30314:07ecd56bbeae84129fdff591ef7e3425:15b19dcc08463dfcf7c9bceb103bac03c7585f8bca6580f8935ce0aab2a23fb5ad812c5d0d3b6ec98207bb04828250c92ffb4f24b17dc883b1019d20e3a033969ff3aa",
+      "icon": "🧮",
+      "createdAt": "2026-04-12T12:33:06.982Z"
+    },
+    {
+      "id": "57530a30-3f04-4d6b-8950-382016905a33",
+      "userId": "97ecb01c-6ac4-4b4c-b766-3aa29e5b347a",
+      "type": "calc",
+      "description": "eef9241aceaefd02f0d0cdc3:8a0720c655d348e9fda62bb108813a47:d16ef7770f795fdca8c803a12379ccd79823b01b207c64565d132a8baf6bf53fb5739e6e08ee9fde7b",
+      "icon": "🧮",
+      "createdAt": "2026-04-12T12:33:16.140Z"
+    },
+    {
+      "id": "a61659fc-3023-4983-b6f4-1e8ea88b7ddf",
+      "userId": "97ecb01c-6ac4-4b4c-b766-3aa29e5b347a",
+      "type": "draft_saved",
+      "description": "a86ba7b3e748639ea63bac79:a902500123869f51425de8881e81e566:e362bbc554779338bad78d5f1153b49b1d83de0390a8f2beb39cfeb006c58c",
+      "icon": "📄",
+      "createdAt": "2026-04-12T12:33:42.443Z"
+    }
+  ],
+  "messages": [
+    {
+      "id": "11ea3e39-94dd-4533-9a69-ba58a19bc50a",
+      "userId": "97ecb01c-6ac4-4b4c-b766-3aa29e5b347a",
+      "role": "user",
+      "content": "34b05e81ab01d4bb4af79623:90bd92557e21cd41737db735242b422d:7080581a55b1ca81bafb9d672d60cd3c06fc3361eb7efa62e340011bcf8f64a35aebb9ea779646aaa12c38fdf354871bd2dd",
+      "tool": "chat",
+      "createdAt": "2026-04-12T12:34:11.249Z"
+    }
+  ]
+}
