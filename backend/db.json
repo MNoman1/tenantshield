@@ -8,6 +8,39 @@
       "createdAt": "2026-04-12T12:31:10.956Z",
       "plan": "free",
       "emirate": "dubai"
+    },
+    {
+      "id": "a3b65f73-9387-4b3d-ae78-0433e353d1bb",
+      "email": "fullstackdev.noman@gmail.com",
+      "passwordHash": "$2b$12$qDdFRj3kw.FfmwgSfuaBquHKTjvoSk5sYQ9AchyMKT4YJnVGQYMUy",
+      "name": "Muhammad Noman",
+      "role": "landlord",
+      "phone": "+971554361009",
+      "emirate": "dubai",
+      "createdAt": "2026-04-18T04:12:29.636Z",
+      "plan": "free"
+    },
+    {
+      "id": "e6bda95a-a277-4a05-9fd4-f3a263adf726",
+      "email": "test@test.com",
+      "passwordHash": "$2b$12$6DtNRKhrbqmMVjf618kZ9.PyB6dCb6KHtQzTUwHTl7Ei4MJa2i1gS",
+      "name": "Muhammad Noman",
+      "role": "tenant",
+      "phone": "+971554361009",
+      "emirate": "dubai",
+      "createdAt": "2026-04-18T04:17:39.940Z",
+      "plan": "free"
+    },
+    {
+      "id": "ec8808aa-cbca-4979-b5e5-1f8139eeef77",
+      "email": "ajmal@ajmal.com",
+      "passwordHash": "$2b$12$Sf0lG0kqG7Awho77/jHeXe9dRl96LGTiE8.dDdq6kr3qJWRstFyJO",
+      "name": "AJmal",
+      "role": "landlord",
+      "phone": "+971253236",
+      "emirate": "dubai",
+      "createdAt": "2026-04-18T06:51:33.454Z",
+      "plan": "free"
     }
   ],
   "sessions": [],

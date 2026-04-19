@@ -4,7 +4,7 @@ import api, { setAuthToken } from '../api'
 const AuthContext = createContext(null)
 
 export function AuthProvider({ children }) {
-  const [token, setToken] = useState(() => localStorage.getItem('ts_token'))
+  const [token, setToken] = useState(() => localStorage.getItem('ts_v3_token'))
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
 
@@ -23,7 +23,7 @@ export function AuthProvider({ children }) {
 
   const login = async (email, password) => {
     const { data } = await api.post('/api/auth/login', { email, password })
-    localStorage.setItem('ts_token', data.token)
+    localStorage.setItem('ts_v3_token', data.token)
     setAuthToken(data.token)
     setToken(data.token)
     setUser(data.user)
@@ -32,7 +32,7 @@ export function AuthProvider({ children }) {
 
   const register = async (name, email, password, role, phone) => {
     const { data } = await api.post('/api/auth/register', { name, email, password, role, phone })
-    localStorage.setItem('ts_token', data.token)
+    localStorage.setItem('ts_v3_token', data.token)
     setAuthToken(data.token)
     setToken(data.token)
     setUser(data.user)
@@ -40,15 +40,15 @@ export function AuthProvider({ children }) {
   }
 
   const logout = () => {
-    localStorage.removeItem('ts_token')
+    localStorage.removeItem('ts_v3_token')
     setAuthToken(null)
     setToken(null)
     setUser(null)
   }
 
-  const updateProfile = async (data) => {
-    await api.patch('/api/auth/profile', data)
-    setUser(u => ({ ...u, ...data }))
+  const updateProfile = async (updates) => {
+    await api.patch('/api/auth/profile', updates)
+    setUser(u => ({ ...u, ...updates }))
   }
 
   return (
